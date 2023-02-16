@@ -1,0 +1,119 @@
+<odoo>
+    <data>
+        <record model="ir.sequence" id="ecube_sale_sequence">
+            <field name="name">Media Monitor Sequence</field>
+            <field name="code">mail.sequence</field>
+            <field name="prefix">Co</field>
+            <field name="padding">3</field>
+        </record>
+        <record model="ir.ui.view" id="simple_module_list">
+            <field name="name">simple_module_list</field>
+            <field name="model">simple.module</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree delete="0">
+                    <field string="Name" name="name"/>
+                    <field string="Date" name="date"/>
+                    <field string="Status" name="state"/>
+                    <field string="Reference" name="seq_num"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="simple_module_form">
+            <field name="name">Simple Module</field>
+            <field name="model">simple.module</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form delete="0" >
+                    <header>
+                        <button name="draft" string="Draft" type="object"  attrs="{'invisible':[('state','=','draft')]}" />
+                        <button name="validate" string="Validate" type="object"  attrs="{'invisible':[('state','=','validate')]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,validate"/>
+                    </header>
+                    <sheet>
+                    <div>
+                        <h1>
+                            <field placeholder="Sequence" name="seq_num" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field string="Name" name="name"  required="1"  attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field string="File Upload" name="file_upload"   attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field string="Price" name="price"  required="1"  attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field string="Boolean" name="boolean_field"  required="1"  attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field string="Quantity" name="quantity"  required="1"  attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field string="Total" name="total"   readonly="1"  attrs="{'readonly':[('state','=','validate')]}"/>
+                        </group>
+                        <group>
+                            <field string="Date" name="date"  required="1"  attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field string="Message" name="message"  required="1"  attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field string="AGE" name="age_field"  required="1"  attrs="{'readonly':[('state','=','validate')]}"/>
+                            <field string="User Name" name="user_name" required="1" attrs="{'readonly':[('state','=','validate')]}"/>
+                            <!-- <field string="Res Partner" name="res_partner"  required="1"  attrs="{'readonly':[('state','=','validate')]}"/> -->
+                            <field string="Users" name="user_id_ecube"  />
+                        </group>
+                    </group>
+                        <notebook>
+                            <page string="test page"> 
+                                <field name="one2many_field">
+                                    <tree editable="bottom" nolabel="1">
+                                        <field name="one2many_char"/>
+                                        <field name="one2many_text" required="1"/>
+                                        <field name="one2many_qty" attrs="{'readonly':[('state','=','validate')]}"/>
+                                        <field name="state"/>
+                                        <field name="tree_link"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Product">
+                                <field name="tree_link" attrs="{'readonly':[('state','=','validate')]}" >
+                                    <tree editable="bottom" delete="false" >
+                                         <field string="Name" name="name"  required="1"  />
+                                        <field string="File Upload" name="file_upload"  required="1"  />
+                                        <field string="Price" name="price"  required="1"  />
+                                        <field string="Quantity" name="quantity"  required="1"  />
+                                        <field string="AGE" name="age_field"  required="1"  />
+                                        <field string="Date" name="date"  required="1"  />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="HTML">
+                                <field name="tree_view" attrs="{'readonly':[('state','=','validate')]}" >
+                                    <tree editable="bottom" delete="false"  >
+                                        <field string="Html" name="html_field"  required="1"  />
+                                    </tree>
+                                </field>
+                            </page>
+                       </notebook>
+                    </sheet>
+<!--                     <div class="oe_chatter" attrs="{'readonly':[('state','=','validate')]}">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div> -->
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="simple_module_window_new">
+            <field name="name">Simple Module</field>
+            <field name="res_model">simple.module</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+         <menuitem name="Simple Module 1" id="simple_module_menu_1"/>
+         <menuitem name="Simple Module 2" id="simple_module_menu_2"
+                   parent="simple_module.simple_module_menu_1" />
+
+
+         <menuitem name="Simple Module 3" id="simple_module_menu_3"
+                   parent="simple_module.simple_module_menu_2" />
+         
+
+         <menuitem name="Simple Module 4" id="simple_module_menu"
+                  action="simple_module_window_new" parent="simple_module.simple_module_menu_3" />
+
+    </data>
+</odoo>

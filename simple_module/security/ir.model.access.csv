@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_simple_module,simple.module.,model_simple_module,base.group_user,1,1,1,1
+access_simple_tree_module,simple.module.tree,model_simple_module_tree,base.group_user,1,1,1,1
